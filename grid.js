@@ -1,5 +1,5 @@
 // grab container to place cells in
-const container = document.querySelector('.container');
+const container = document.querySelector('.grid-container');
 
 // remove all children elements from parent element
 function removeAllChildren(parent) {
@@ -15,12 +15,9 @@ function createEmptyGrid(rows, cols) {
 
     // create default cell
     const cell = document.createElement('div');
-    cell.textContent = 'guh';
     cell.style.backgroundColor = 'white';
     cell.style.borderStyle = 'dotted';
     cell.style.borderColor = 'black';
-    cell.style.width = '50px';
-    cell.style.height = '50px';
 
     // create grid of cells and append it to the container
     const grid = [...Array(16)].map(_ => Array(16).fill(null)); // matrix
@@ -29,13 +26,12 @@ function createEmptyGrid(rows, cols) {
             grid[i][j] = cell.cloneNode(true);
             container.appendChild(grid[i][j]);
         }
-    container.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    container.style.gridTemplateColumns = `repeat(${cols}, auto)`;
 
     return grid;
 }
 
 
-// container has .clientWidth and .clientHeight
 console.log(container);
-const grid = createEmptyGrid(6, 3);
+const grid = createEmptyGrid(16, 16);
 grid[0][1].style.backgroundColor = 'black';
