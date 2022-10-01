@@ -1,3 +1,10 @@
+// clamp number 
+const clamp = (num, min, max) => {
+    if (num < min) return min;
+    if (num > max) return max;
+    return num;
+}
+
 // remove all children elements from parent element
 function removeAllChildren(parent) {
     while (parent.firstChild) {
@@ -32,7 +39,7 @@ function createEmptyGrid(rows, cols) {
     cell.style.cursor = 'pointer';
 
     // create grid of cells and append it to the container
-    const grid = [...Array(16)].map(_ => Array(16).fill(null)); // matrix
+    const grid = [...Array(rows)].map(_ => Array(cols).fill(null)); // matrix
     for (let i = 0; i < rows; i++)       // rows
         for (let j = 0; j < cols; j++) { // cols
             grid[i][j] = cell.cloneNode(true);
@@ -45,7 +52,12 @@ function createEmptyGrid(rows, cols) {
     return grid;
 }
 
-function resetGrid(grid) {
-    console.log('button pressed');
-    prompt("Enter new grid size:", 16);
+function resetGrid(grid, min, max) {
+    let newSize = NaN;
+    while (isNaN(newSize)) {
+        newSize = parseInt(prompt("Enter new grid size:", 16));
+    }
+    newSize = clamp(newSize, min, max);
+
+    grid = createEmptyGrid(newSize, newSize);
 }
