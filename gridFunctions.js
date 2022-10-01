@@ -5,6 +5,12 @@ const clamp = (num, min, max) => {
     return num;
 };
 
+// random number in a range
+const randomInt = (min, max) => {
+    const diff = max - min;
+    return Math.floor(Math.random()*diff) + min;
+}
+
 // remove all children elements from parent element
 function removeAllChildren(parent) {
     while (parent.firstChild) {
@@ -15,12 +21,16 @@ function removeAllChildren(parent) {
 // what the cell should do
 function cellFunctionality(e) {
     const cell = e.target;
-    cell.style.backgroundColor = 'black';
+    const r = randomInt(0, 255);
+    const g = randomInt(0, 255);
+    const b = randomInt(0, 255);
+    cell.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 }
 
 // adds event listeners to each cell
 function addCellFunctionality(eventType) {
     const cells = document.querySelectorAll('.cell');
+
     cells.forEach(cell => cell.addEventListener(eventType, 
         cellFunctionality));
 }
