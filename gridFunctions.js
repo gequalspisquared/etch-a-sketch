@@ -44,3 +44,8 @@ function createEmptyGrid(rows, cols) {
 
     return grid;
 }
+
+function resetGrid(grid) {
+    console.log('button pressed');
+    prompt("Enter new grid size:", 16);
+}
