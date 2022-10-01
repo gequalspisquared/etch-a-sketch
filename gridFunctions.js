@@ -3,7 +3,7 @@ const clamp = (num, min, max) => {
     if (num < min) return min;
     if (num > max) return max;
     return num;
-}
+};
 
 // remove all children elements from parent element
 function removeAllChildren(parent) {
@@ -19,14 +19,14 @@ function cellFunctionality(e) {
 }
 
 // adds event listeners to each cell
-function addCellFunctionality() {
+function addCellFunctionality(eventType) {
     const cells = document.querySelectorAll('.cell');
-    cells.forEach(cell => cell.addEventListener('mouseover', 
+    cells.forEach(cell => cell.addEventListener(eventType, 
         cellFunctionality));
 }
 
 // remove all children from container and append a new grid
-function createEmptyGrid(rows, cols) {
+function createEmptyGrid(rows, cols = rows) {
     // reset the grid
     removeAllChildren(container);
 
@@ -47,17 +47,15 @@ function createEmptyGrid(rows, cols) {
             container.appendChild(grid[i][j]);
         }
     container.style.gridTemplateColumns = `repeat(${cols}, auto)`;
-    addCellFunctionality();
-
-    return grid;
+    addCellFunctionality('mouseover');
 }
 
-function resetGrid(grid, min, max) {
+function resetGrid(min, max) {
     let newSize = NaN;
     while (isNaN(newSize)) {
         newSize = parseInt(prompt("Enter new grid size:", 16));
     }
     newSize = clamp(newSize, min, max);
 
-    grid = createEmptyGrid(newSize, newSize);
+    createEmptyGrid(newSize);
 }
